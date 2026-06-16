@@ -65,10 +65,22 @@ YOUR VAULT
 """)
 
 
-@click.command(context_settings=dict(help_option_names=["-h", "--help"]))
+import sys
+
+@click.command(
+    context_settings=dict(
+        help_option_names=[],
+        ignore_unknown_options=True,
+    )
+)
 @click.argument("args", nargs=-1)
 def main(args):
     """Pocket Vault - Manage your personal prompt library."""
+
+    # Check for help flags before click processes them
+    if any(flag in sys.argv for flag in ("-h", "--help")):
+        print_help()
+        return
 
     # No arguments - browse vault
     if not args:
@@ -76,6 +88,11 @@ def main(args):
         return
 
     command = args[0]
+
+    # Handle --help and -h
+    if command in ("-h", "--help"):
+        print_help()
+        return
 
     # Reserved commands
     if command == "auth":
