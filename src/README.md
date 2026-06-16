@@ -1,6 +1,6 @@
-# Technical Guide
+# Pocket Technical Guide
 
-Complete reference for installing, setting up, and using Prompt Vault.
+Complete reference for installing, setting up, and using Pocket.
 
 ## Installation
 
@@ -29,7 +29,7 @@ pip install -e .
 ### First-time authentication
 
 ```bash
-pv auth
+pk auth
 ```
 
 This will:
@@ -45,7 +45,7 @@ This will:
 
 ### Re-authentication
 
-If you run `pv auth` again, it will show your current config and ask if you want to re-authenticate:
+If you run `pk auth` again, it will show your current config and ask if you want to re-authenticate:
 
 ```
 Already authenticated
@@ -60,9 +60,9 @@ Re-authenticate? [y/N]:
 ### Searching
 
 ```bash
-pv <query>              # Search by keyword across all prompts
-pv python style         # Find prompts about python style
-pv                      # Browse the full vault structure
+pk <query>              # Search by keyword across all prompts
+pk python style         # Find prompts about python style
+pk                      # Browse the full vault structure
 ```
 
 Search checks filenames, folder names, and content. Results show matching files with previews.
@@ -70,9 +70,9 @@ Search checks filenames, folder names, and content. Results show matching files 
 ### Adding prompts
 
 ```bash
-pv add <path>           # Create a new prompt (opens your editor)
-pv add coding/python    # Creates coding/python.md in your vault
-pv add ideas            # Creates ideas.md in your vault
+pk add <path>           # Create a new prompt (opens your editor)
+pk add coding/python    # Creates coding/python.md in your vault
+pk add ideas            # Creates ideas.md in your vault
 ```
 
 Folders are created automatically. `.md` extension is added if missing.
@@ -82,8 +82,8 @@ The CLI opens your preferred editor (checks `$EDITOR` or `$VISUAL`, falls back t
 ### Editing prompts
 
 ```bash
-pv edit <path>          # Open an existing prompt in your editor
-pv edit coding/python   # Opens coding/python.md for editing
+pk edit <path>          # Open an existing prompt in your editor
+pk edit coding/python   # Opens coding/python.md for editing
 ```
 
 Auto-commits and pushes after you save.
@@ -91,8 +91,8 @@ Auto-commits and pushes after you save.
 ### Reading prompts
 
 ```bash
-pv read <path>          # Output prompt content to stdout
-pv read coding/python   # Prints the content of coding/python.md
+pk read <path>          # Output prompt content to stdout
+pk read coding/python   # Prints the content of coding/python.md
 ```
 
 Use this to let your LLM read prompts directly without copying files.
@@ -100,8 +100,8 @@ Use this to let your LLM read prompts directly without copying files.
 ### Using prompts
 
 ```bash
-pv use <path>           # Copy a prompt to your current folder
-pv use coding/python    # Copies python.md to where you are now
+pk use <path>           # Copy a prompt to your current folder
+pk use coding/python    # Copies python.md to where you are now
 ```
 
 Use this to copy prompts into your current project.
@@ -109,9 +109,9 @@ Use this to copy prompts into your current project.
 ### Deleting
 
 ```bash
-pv rm <path>            # Delete a prompt file or entire folder
-pv rm coding/python     # Deletes coding/python.md
-pv rm coding            # Deletes the whole coding/ folder
+pk rm <path>            # Delete a prompt file or entire folder
+pk rm coding/python     # Deletes coding/python.md
+pk rm coding            # Deletes the whole coding/ folder
 ```
 
 Auto-commits and pushes the deletion.
@@ -119,18 +119,18 @@ Auto-commits and pushes the deletion.
 ### Syncing
 
 ```bash
-pv pull                 # Pull latest changes from remote
-pv push                 # Push local changes to remote
+pk pull                 # Pull latest changes from remote
+pk push                 # Push local changes to remote
 ```
 
 - Writes (`add`, `edit`, `rm`) auto-commit and push
 - Reads (`search`, `browse`) are instant from local copy
-- Use `pv pull` to sync if you edited files manually or from another device
+- Use `pk pull` to sync if you edited files manually or from another device
 
 ### Help
 
 ```bash
-pv help                 # Show complete command reference
+pk help                 # Show complete command reference
 ```
 
 This outputs instructions that both you and your LLM can read.
@@ -140,13 +140,13 @@ This outputs instructions that both you and your LLM can read.
 ### Option 1: Tell your LLM to check help
 
 ```
-You: "Run `pv help` and follow those instructions"
+You: "Run `pk help` and follow those instructions"
 LLM: [reads help, learns commands, uses them]
 ```
 
 ### Option 2: Add to your agent config
 
-Run `pv help`, copy the output, and paste it into:
+Run `pk help`, copy the output, and paste it into:
 - `AGENTS.md` (for OpenCode, Claude Code)
 - `.cursorrules` (for Cursor)
 - Your agent's system prompt
@@ -157,7 +157,7 @@ For agents that support skills (OpenCode, Claude Code):
 
 ```bash
 mkdir -p .opencode/skills/prompt-vault
-pv help > .opencode/skills/prompt-vault/SKILL.md
+pk help > .opencode/skills/prompt-vault/SKILL.md
 ```
 
 Now your agent loads the skill automatically when needed.
@@ -196,8 +196,8 @@ Your vault is a regular git repo. You can:
 - No network round-trip
 
 **Manual sync:**
-- `pv pull` to get latest from remote
-- `pv push` to push all local changes
+- `pk pull` to get latest from remote
+- `pk push` to push all local changes
 
 ### Editor configuration
 
@@ -220,11 +220,11 @@ export EDITOR="vim"
 
 ### "Vault not initialized"
 
-Run `pv auth` to set up your vault.
+Run `pk auth` to set up your vault.
 
 ### "Git authentication failed"
 
-Your token may be invalid or expired. Run `pv auth` to re-authenticate.
+Your token may be invalid or expired. Run `pk auth` to re-authenticate.
 
 ### "Repository not found"
 
@@ -240,7 +240,7 @@ export EDITOR="vim"          # Vim
 
 ### Changes not syncing
 
-Run `pv pull` to get latest from remote, then `pv push` to push your changes.
+Run `pk pull` to get latest from remote, then `pk push` to push your changes.
 
 ## Development
 

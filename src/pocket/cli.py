@@ -8,46 +8,45 @@ from .vault import add_prompt, edit_prompt, use_prompt, read_prompt, delete_prom
 
 
 HELP_TEXT = f"""
-PROMPT VAULT
-============
+POCKET
+======
 
-Your personal prompt library, stored in a private git repo.
-All prompts are .md files organized however you like.
+Your most used prompts, always with you.
 
 SEARCHING
-  pv <query>              Search by keyword across all prompts
-  pv python style         Example: finds prompts about python style
-  pv                      Browse the full vault structure
+  pk <query>              Search by keyword across all prompts
+  pk python style         Example: finds prompts about python style
+  pk                      Browse the full vault structure
 
 ADDING PROMPTS
-  pv add <path>           Create a new prompt (opens your editor)
-  pv add coding/python    Creates coding/python.md in your vault
-  pv add ideas            Creates ideas.md in your vault
+  pk add <path>           Create a new prompt (opens your editor)
+  pk add coding/python    Creates coding/python.md in your vault
+  pk add ideas            Creates ideas.md in your vault
   Folders are created automatically. .md is added if missing.
 
 EDITING PROMPTS
-  pv edit <path>          Open an existing prompt in your editor
-  pv edit coding/python   Opens coding/python.md for editing
+  pk edit <path>          Open an existing prompt in your editor
+  pk edit coding/python   Opens coding/python.md for editing
 
 USING PROMPTS
-  pv read <path>          Output prompt content to stdout
-  pv read coding/python   Prints the content of coding/python.md
-  pv use <path>           Copy a prompt to your current folder
-  pv use coding/python    Copies python.md to where you are now
+  pk read <path>          Output prompt content to stdout
+  pk read coding/python   Prints the content of coding/python.md
+  pk use <path>           Copy a prompt to your current folder
+  pk use coding/python    Copies python.md to where you are now
 
 DELETING
-  pv rm <path>            Delete a prompt file or entire folder
-  pv rm coding/python     Deletes coding/python.md
-  pv rm coding            Deletes the whole coding/ folder
+  pk rm <path>            Delete a prompt file or entire folder
+  pk rm coding/python     Deletes coding/python.md
+  pk rm coding            Deletes the whole coding/ folder
 
 SYNCING
-  pv pull                 Pull latest changes from remote
-  pv push                 Push local changes to remote
+  pk pull                 Pull latest changes from remote
+  pk push                 Push local changes to remote
   Writes (add, edit, rm) auto-commit and push.
   Reads (search, browse) are instant from local copy.
 
 SETUP
-  pv auth                 Authenticate with GitHub (one time)
+  pk auth                 Authenticate with GitHub (one time)
 
 YOUR VAULT
   Location: {VAULT_DIR}
@@ -96,7 +95,7 @@ def main(args):
 
     if command == "add":
         if len(args) < 2:
-            print("Error: Usage: pv add <path>")
+            print("Error: Usage: pk add <path>")
             sys.exit(1)
         path = args[1]
         success, message = add_prompt(path)
@@ -107,7 +106,7 @@ def main(args):
 
     if command == "edit":
         if len(args) < 2:
-            print("Error: Usage: pv edit <path>")
+            print("Error: Usage: pk edit <path>")
             sys.exit(1)
         path = args[1]
         success, message = edit_prompt(path)
@@ -118,7 +117,7 @@ def main(args):
 
     if command == "use":
         if len(args) < 2:
-            print("Error: Usage: pv use <path>")
+            print("Error: Usage: pk use <path>")
             sys.exit(1)
         path = args[1]
         success, message = use_prompt(path)
@@ -129,7 +128,7 @@ def main(args):
 
     if command == "read":
         if len(args) < 2:
-            print("Error: Usage: pv read <path>")
+            print("Error: Usage: pk read <path>")
             sys.exit(1)
         path = args[1]
         success, content = read_prompt(path)
@@ -141,7 +140,7 @@ def main(args):
 
     if command == "rm":
         if len(args) < 2:
-            print("Error: Usage: pv rm <path>")
+            print("Error: Usage: pk rm <path>")
             sys.exit(1)
         path = args[1]
         success, message = delete_prompt(path)

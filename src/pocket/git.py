@@ -40,7 +40,7 @@ def clone_repo(repo_url):
 def pull():
     """Pull latest changes from remote."""
     if not VAULT_DIR.exists():
-        return False, "Vault not initialized. Run 'pv auth' first."
+        return False, "Vault not initialized. Run 'pk auth' first."
 
     result = run_git("pull")
     if result.returncode != 0:
@@ -51,7 +51,7 @@ def pull():
 def push():
     """Push local changes to remote."""
     if not VAULT_DIR.exists():
-        return False, "Vault not initialized. Run 'pv auth' first."
+        return False, "Vault not initialized. Run 'pk auth' first."
 
     # Add all changes
     run_git("add", "-A")

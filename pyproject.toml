@@ -1,7 +1,7 @@
 [project]
-name = "prompt-vault"
+name = "pocket"
 version = "0.1.0"
-description = "Keep track of your prompts across devices by saving them in a private git repo"
+description = "A home for your most used prompts, synced across devices"
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
@@ -23,7 +23,7 @@ Source = "https://github.com/DKeAlvaro/prompt-vault-tool"
 BugTracker = "https://github.com/DKeAlvaro/prompt-vault-tool/issues"
 
 [project.scripts]
-pv = "prompt_vault.cli:main"
+pk = "pocket.cli:main"
 
 [build-system]
 requires = ["setuptools>=61.0"]
