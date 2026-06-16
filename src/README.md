@@ -139,6 +139,14 @@ pv add ideas
 pv add projects/alpha/onboarding
 ```
 
+### `pv add <path> --content "..."`
+Create a new prompt with inline content, without opening an editor. Useful for programmatic use by LLMs or scripts.
+
+```bash
+pv add coding/python-style --content "Always use type hints and dataclasses."
+pv add writing/email-drafting --content "You are a professional email assistant."
+```
+
 ### `pv edit <path>` or `pv edit <number>`
 Open an existing prompt in your editor. Auto-commits and pushes on save.
 

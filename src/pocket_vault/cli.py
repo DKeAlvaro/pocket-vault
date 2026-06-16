@@ -32,6 +32,7 @@ Prompts are .md files in a private GitHub repo, with a local clone for fast sear
   pv                 List prompts (numbered, favorites first)
   pv <number>        Copy prompt to clipboard (e.g. pv 3, pv 4.1)
   pv add <path>      Create a new prompt (opens editor)
+  pv add <path> --content "..."  Create prompt with inline content
 
   Vault:  {VAULT_DIR}
 {_format_remote()}
@@ -55,6 +56,7 @@ SEARCHING
 
 ADDING PROMPTS
   pv add <path>           Create a new prompt (opens editor)
+  pv add <path> --content Create a new prompt with inline content (no editor)
   pv add coding/python    Creates coding/python.md in your vault
   pv add ideas            Creates ideas.md in your vault
   Folders are created automatically. .md is added if missing.
@@ -173,10 +175,19 @@ def main(args):
 
     if command == "add":
         if len(args) < 2:
-            print("Error: Usage: pv add <path>")
+            print("Error: Usage: pv add <path> [--content \"...\"]")
             sys.exit(1)
         path = args[1]
-        success, message = add_prompt(path)
+        # Parse --content flag
+        content = None
+        if "--content" in args:
+            content_idx = args.index("--content")
+            if content_idx + 1 < len(args):
+                content = args[content_idx + 1]
+            else:
+                print("Error: --content requires a value")
+                sys.exit(1)
+        success, message = add_prompt(path, content=content)
         print(message)
         if not success:
             sys.exit(1)

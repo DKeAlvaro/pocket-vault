@@ -1,16 +1,12 @@
-# Pocket Vault
+<p align="center">
+  <img src="assets/logo.png" alt="Pocket Vault" width="400">
+</p>
 
 A Python CLI for managing your LLM prompts, stored as `.md` files in a private git repo. That's the whole thing.
 
-```
-$ pv
-* 1  jupyter-handling
-  2  pr-template
-  3  code-review
-
-$ pv 2
-Copied pr-template.md to clipboard
-```
+<p align="center">
+  <img src="assets/usage.png" alt="Pocket Vault usage" width="450">
+</p>
 
 `pv` lists your prompts. `pv <number>` copies one to your clipboard. You paste it into any LLM.
 

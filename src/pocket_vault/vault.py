@@ -29,8 +29,9 @@ def open_in_editor(filepath):
         subprocess.run([editor, str(filepath)])
 
 
-def add_prompt(path):
-    """Create a new prompt file and open it in editor."""
+def add_prompt(path, content=None):
+    """Create a new prompt file. If content is provided, write it directly.
+    Otherwise, open the file in the user's editor."""
     if not VAULT_DIR.exists():
         return False, "Vault not initialized. Run 'pv auth' first."
 
@@ -43,11 +44,13 @@ def add_prompt(path):
     # Create parent directories
     filepath.parent.mkdir(parents=True, exist_ok=True)
 
-    # Create empty file
-    filepath.touch()
-
-    # Open in editor
-    open_in_editor(filepath)
+    if content is not None:
+        # Write content directly (non-interactive mode)
+        filepath.write_text(content, encoding="utf-8")
+    else:
+        # Create empty file and open in editor
+        filepath.touch()
+        open_in_editor(filepath)
 
     # Commit and push
     success, message = commit_and_push(f"vault: add {path}")
