@@ -2,12 +2,21 @@ from pathlib import Path
 import sys
 import click
 from .auth import auth_flow
-from .git import pull, push, VAULT_DIR
+from .git import pull, push, VAULT_DIR, get_remote_url
 from .search import search_vault, format_results
 from .vault import add_prompt, edit_prompt, use_prompt, read_prompt, delete_prompt, browse_vault
 
 
-HELP_TEXT = f"""
+def print_help():
+    """Print help text."""
+    import re
+    remote = get_remote_url()
+    if remote:
+        remote = re.sub(r"https://[^@]+@", "https://", remote)
+        remote_line = f"  Remote:   {remote}"
+    else:
+        remote_line = "  Remote:   not configured"
+    print(f"""
 POCKET VAULT
 ============
 
@@ -50,9 +59,10 @@ SETUP
 
 YOUR VAULT
   Location: {VAULT_DIR}
+{remote_line}
   It is a regular git repo. You can navigate it with ls, cat, etc.
   All changes are tracked in git history.
-"""
+""")
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -90,7 +100,7 @@ def main(args):
         return
 
     if command == "help":
-        print(HELP_TEXT)
+        print_help()
         return
 
     if command == "add":

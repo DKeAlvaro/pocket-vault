@@ -8,6 +8,16 @@ TOKEN_FILE = CONFIG_DIR / "token"
 REPO_FILE = CONFIG_DIR / "repo"
 
 
+def get_remote_url():
+    """Get the remote URL of the vault repo."""
+    if not VAULT_DIR.exists():
+        return None
+    result = run_git("remote", "get-url", "origin")
+    if result.returncode == 0:
+        return result.stdout.strip()
+    return None
+
+
 def run_git(*args, cwd=None):
     """Run a git command and return output."""
     cwd = cwd or VAULT_DIR
