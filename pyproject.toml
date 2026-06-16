@@ -1,6 +1,6 @@
 [project]
 name = "pocket-vault"
-version = "0.2.2"
+version = "0.2.3"
 description = "Your most-used prompts, one keystroke away. Synced across devices. Works with any LLM."
 readme = "README.md"
 requires-python = ">=3.8"
