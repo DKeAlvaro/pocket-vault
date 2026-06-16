@@ -27,4 +27,4 @@ pip install pocket-vault
 pv auth
 ```
 
-Full reference: [Technical Guide](src/README.md)
+Full reference: [Technical Guide](https://github.com/DKeAlvaro/pocket-vault/blob/main/src/README.md)
