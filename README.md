@@ -121,16 +121,6 @@ pv push                 # Push local changes
 pv help                 # Show full command reference
 ```
 
-## LLM Integration
-
-Your LLM can use Pocket Vault in three ways:
-
-1. **Tell it to check help:** "Run `pv help` and follow those instructions"
-2. **Add to agent config:** Copy `pv help` output into `AGENTS.md`, `.cursorrules`, or your agent's system prompt
-3. **Create a skill file:** `pv help > .opencode/skills/pocket-vault/SKILL.md`
-
-Once configured, your LLM can search, read, and save prompts automatically.
-
 ## Full Documentation
 
 See the [Technical Guide](src/README.md) for detailed setup, architecture, and troubleshooting.
