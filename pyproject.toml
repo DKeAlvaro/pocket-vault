@@ -18,9 +18,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/DKeAlvaro/prompt-vault-tool"
-Source = "https://github.com/DKeAlvaro/prompt-vault-tool"
-BugTracker = "https://github.com/DKeAlvaro/prompt-vault-tool/issues"
+Homepage = "https://github.com/DKeAlvaro/pocket-vault"
+Source = "https://github.com/DKeAlvaro/pocket-vault"
+BugTracker = "https://github.com/DKeAlvaro/pocket-vault/issues"
 
 [project.scripts]
 pv = "pocket.cli:main"
