@@ -55,7 +55,7 @@ def auth_flow():
 
         print()
 
-    print("Prompt Vault Authentication")
+    print("Pocket Vault Authentication")
     print("-" * 40)
     print()
 

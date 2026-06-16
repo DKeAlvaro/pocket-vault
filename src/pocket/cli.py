@@ -58,7 +58,7 @@ YOUR VAULT
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.argument("args", nargs=-1)
 def main(args):
-    """Prompt Vault - Manage your personal prompt library."""
+    """Pocket Vault - Manage your personal prompt library."""
 
     # No arguments - browse vault
     if not args:
