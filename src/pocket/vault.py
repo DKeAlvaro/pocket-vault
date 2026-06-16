@@ -30,7 +30,7 @@ def open_in_editor(filepath):
 def add_prompt(path):
     """Create a new prompt file and open it in editor."""
     if not VAULT_DIR.exists():
-        return False, "Vault not initialized. Run 'pk auth' first."
+        return False, "Vault not initialized. Run 'pv auth' first."
 
     # Ensure .md extension
     if not path.endswith(".md"):
@@ -58,7 +58,7 @@ def add_prompt(path):
 def edit_prompt(path):
     """Edit an existing prompt file."""
     if not VAULT_DIR.exists():
-        return False, "Vault not initialized. Run 'pk auth' first."
+        return False, "Vault not initialized. Run 'pv auth' first."
 
     # Ensure .md extension
     if not path.endswith(".md"):
@@ -83,7 +83,7 @@ def edit_prompt(path):
 def read_prompt(path):
     """Read and output a prompt's content."""
     if not VAULT_DIR.exists():
-        return False, "Vault not initialized. Run 'pk auth' first."
+        return False, "Vault not initialized. Run 'pv auth' first."
 
     # Ensure .md extension
     if not path.endswith(".md"):
@@ -104,7 +104,7 @@ def read_prompt(path):
 def use_prompt(path):
     """Copy a prompt to the current directory."""
     if not VAULT_DIR.exists():
-        return False, "Vault not initialized. Run 'pk auth' first."
+        return False, "Vault not initialized. Run 'pv auth' first."
 
     # Ensure .md extension
     if not path.endswith(".md"):
@@ -125,7 +125,7 @@ def use_prompt(path):
 def delete_prompt(path):
     """Delete a prompt file or folder."""
     if not VAULT_DIR.exists():
-        return False, "Vault not initialized. Run 'pk auth' first."
+        return False, "Vault not initialized. Run 'pv auth' first."
 
     filepath = VAULT_DIR / path
 
@@ -152,7 +152,7 @@ def delete_prompt(path):
 def browse_vault():
     """Show the vault structure."""
     if not VAULT_DIR.exists():
-        return "Vault not initialized. Run 'pk auth' first."
+        return "Vault not initialized. Run 'pv auth' first."
 
     output = ["Vault structure:\n"]
 

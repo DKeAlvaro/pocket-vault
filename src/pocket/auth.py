@@ -143,8 +143,8 @@ def auth_flow():
     print(f"Vault location: {VAULT_DIR}")
     print()
     print("Next steps:")
-    print("  pk add <path>    - Add a new prompt")
-    print("  pk <query>       - Search your vault")
-    print("  pk help          - Show LLM instructions")
+    print("  pv add <path>    - Add a new prompt")
+    print("  pv <query>       - Search your vault")
+    print("  pv help          - Show LLM instructions")
 
     return True, "Success"

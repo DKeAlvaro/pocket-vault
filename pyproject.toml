@@ -1,5 +1,5 @@
 [project]
-name = "pocket"
+name = "pocket-vault"
 version = "0.1.0"
 description = "A home for your most used prompts, synced across devices"
 readme = "README.md"
@@ -23,7 +23,7 @@ Source = "https://github.com/DKeAlvaro/prompt-vault-tool"
 BugTracker = "https://github.com/DKeAlvaro/prompt-vault-tool/issues"
 
 [project.scripts]
-pk = "pocket.cli:main"
+pv = "pocket.cli:main"
 
 [build-system]
 requires = ["setuptools>=61.0"]
