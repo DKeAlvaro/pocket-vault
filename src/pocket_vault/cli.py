@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 import click
 from .auth import auth_flow
-from .git import pull, push, VAULT_DIR, get_remote_url
+from .git import pull, push, background_pull, VAULT_DIR, get_remote_url
 from .search import search_vault, format_results
 from .state import add_favorite, remove_favorite
 from .vault import (
@@ -115,12 +115,14 @@ def main(args):
     # Check for help flags before click processes them
     if any(flag in sys.argv for flag in ("-h", "--help")):
         print_help()
+        background_pull()
         return
 
     # No arguments - show numbered list
     if not args:
         items = get_numbered_list()
         print(format_numbered_list(items))
+        background_pull()
         return
 
     command = args[0]
@@ -128,6 +130,7 @@ def main(args):
     # Handle --help and -h
     if command in ("-h", "--help"):
         print_help()
+        background_pull()
         return
 
     # Reserved commands
@@ -136,6 +139,7 @@ def main(args):
         if not success:
             print(f"Error: {message}")
             sys.exit(1)
+        background_pull()
         return
 
     if command == "pull":
@@ -154,14 +158,17 @@ def main(args):
 
     if command == "tree":
         print(browse_vault())
+        background_pull()
         return
 
     if command == "help":
         print_help()
+        background_pull()
         return
 
     if command == "help-full":
         print_full_help()
+        background_pull()
         return
 
     if command == "add":
@@ -173,6 +180,7 @@ def main(args):
         print(message)
         if not success:
             sys.exit(1)
+        background_pull()
         return
 
     if command == "edit":
@@ -188,6 +196,7 @@ def main(args):
         print(message)
         if not success:
             sys.exit(1)
+        background_pull()
         return
 
     if command == "fav":
@@ -207,6 +216,7 @@ def main(args):
             print(f"Favorited {path}")
         else:
             print(f"{path} is already a favorite")
+        background_pull()
         return
 
     if command == "unfav":
@@ -222,6 +232,7 @@ def main(args):
             print(f"Unfavorited {path}")
         else:
             print(f"{path} is not a favorite")
+        background_pull()
         return
 
     if command == "use":
@@ -237,6 +248,7 @@ def main(args):
         print(message)
         if not success:
             sys.exit(1)
+        background_pull()
         return
 
     if command == "copy":
@@ -252,6 +264,7 @@ def main(args):
         print(message)
         if not success:
             sys.exit(1)
+        background_pull()
         return
 
     if command == "read":
@@ -268,6 +281,7 @@ def main(args):
             print(f"Error: {content}")
             sys.exit(1)
         print(content)
+        background_pull()
         return
 
     if command == "rm":
@@ -279,6 +293,7 @@ def main(args):
         print(message)
         if not success:
             sys.exit(1)
+        background_pull()
         return
 
     # Not a reserved command - check if it's a number (shortcut for copy)
@@ -296,12 +311,14 @@ def main(args):
         print(message)
         if not success:
             sys.exit(1)
+        background_pull()
         return
 
     # Not a reserved command - treat as search query
     query = " ".join(args)
     results = search_vault(query)
     print(format_results(results, query))
+    background_pull()
 
 
 if __name__ == "__main__":

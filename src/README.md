@@ -301,41 +301,6 @@ export EDITOR="vim"
 
 `code --wait` is important so the CLI waits for the editor to close before committing.
 
-## Troubleshooting
-
-### "Vault not initialized"
-
-Run `pv auth`. The vault directory doesn't exist yet.
-
-### "Git authentication failed"
-
-Your token is invalid or expired. Run `pv auth` to enter a new one.
-
-### "Repository not found"
-
-Your token doesn't have the `repo` scope, or the repo doesn't exist under that account. Create a token at https://github.com/settings/tokens with `repo` scope.
-
-### Editor doesn't open
-
-Set `$EDITOR`:
-
-```bash
-export EDITOR="code --wait"  # VS Code
-export EDITOR="vim"          # Vim
-```
-
-### Changes aren't syncing
-
-Auto-push can fail on network issues. Run `pv pull` to fetch the latest, then `pv push` to push anything local.
-
-### Numbers are off-by-one
-
-You probably added or removed prompts. Run `pv` (no args) to see the current list. Numbers are stable except when the underlying file structure changes.
-
-### I deleted a file outside the CLI
-
-Run `pv pull` on other devices, or `pv push` from the device where you deleted it.
-
 ## Development
 
 ### Project structure

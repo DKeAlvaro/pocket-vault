@@ -1,5 +1,6 @@
 import subprocess
 import os
+import threading
 from pathlib import Path
 
 VAULT_DIR = Path.home() / ".pocket-vault"
@@ -82,6 +83,12 @@ def push():
         return False, push_result.stderr
 
     return True, "Pushed successfully"
+
+
+def background_pull():
+    """Pull latest changes in a background thread. Fire-and-forget."""
+    thread = threading.Thread(target=pull, daemon=True)
+    thread.start()
 
 
 def commit_and_push(message):
