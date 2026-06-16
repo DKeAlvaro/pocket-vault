@@ -42,7 +42,7 @@ def clone_repo(repo_url):
         if "authentication failed" in stderr or "could not read username" in stderr:
             return False, "Git authentication failed. Your token may be invalid or expired."
         elif "repository not found" in stderr:
-            return False, "Repository not found. Check that it exists and your token has 'repo' scope."
+            return False, "Repository not found. It may exist but your token doesn't have access. Check that your token has 'repo' scope and access to this repo."
         else:
             return False, f"Git clone failed: {result.stderr.strip()}"
     return True, "Cloned successfully"

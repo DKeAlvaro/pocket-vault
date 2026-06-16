@@ -108,11 +108,17 @@ def auth_flow():
         if response.status_code == 403:
             return False, (
                 "Your token doesn't have permission to create repos.\n"
+                "If the repo already exists, your token may not have access to it.\n"
                 "Create a new token at: https://github.com/settings/tokens\n"
                 "Required scopes: 'repo' (full control of private repositories)"
             )
         elif response.status_code == 422:
-            return False, f"Repo '{repo_name.split('/')[-1]}' already exists or name is invalid."
+            # 422 means repo already exists but we can't access it with this token
+            return False, (
+                f"Repo '{repo_name}' exists but your token doesn't have access.\n"
+                "Make sure your token has 'repo' scope and access to this repo.\n"
+                "If it's an organization repo, the token may need org approval."
+            )
         elif response.status_code != 201:
             error_msg = response.json().get("message", "Unknown error")
             return False, f"Failed to create repo: {error_msg}"
