@@ -4,8 +4,6 @@ Complete reference for installing, setting up, and using Pocket.
 
 ## Installation
 
-### From PyPI (when published)
-
 ```bash
 pip install pocket-vault
 ```
@@ -13,8 +11,8 @@ pip install pocket-vault
 ### From source (development)
 
 ```bash
-git clone https://github.com/DKeAlvaro/prompt-vault-tool.git
-cd prompt-vault-tool
+git clone https://github.com/DKeAlvaro/pocket-vault.git
+cd pocket-vault
 pip install -e .
 ```
 
@@ -156,8 +154,8 @@ Run `pv help`, copy the output, and paste it into:
 For agents that support skills (OpenCode, Claude Code):
 
 ```bash
-mkdir -p .opencode/skills/prompt-vault
-pv help > .opencode/skills/prompt-vault/SKILL.md
+mkdir -p .opencode/skills/pocket-vault
+pv help > .opencode/skills/pocket-vault/SKILL.md
 ```
 
 Now your agent loads the skill automatically when needed.
@@ -247,9 +245,9 @@ Run `pv pull` to get latest from remote, then `pv push` to push your changes.
 ### Project structure
 
 ```
-prompt-vault/
+pocket-vault/
 ├── src/
-    └── pocket/
+    └── pocket_vault/
         ├── __init__.py
         ├── cli.py          # Command routing
         ├── auth.py         # GitHub authentication
