@@ -2,8 +2,8 @@ import subprocess
 import os
 from pathlib import Path
 
-VAULT_DIR = Path.home() / ".prompt-vault"
-CONFIG_DIR = Path.home() / ".config" / "prompt-vault"
+VAULT_DIR = Path.home() / ".pocket-vault"
+CONFIG_DIR = Path.home() / ".config" / "pocket-vault"
 TOKEN_FILE = CONFIG_DIR / "token"
 REPO_FILE = CONFIG_DIR / "repo"
 

@@ -13,8 +13,8 @@ pip install pocket-vault
 ### From source (development)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/prompt-vault.git
-cd prompt-vault
+git clone https://github.com/DKeAlvaro/prompt-vault-tool.git
+cd prompt-vault-tool
 pip install -e .
 ```
 
@@ -34,8 +34,8 @@ pv auth
 
 This will:
 1. Ask for your GitHub Personal Access Token
-2. Create a private repo called `prompt-vault` (or use an existing one)
-3. Clone it to `~/.prompt-vault/`
+2. Create a private repo called `pocket-vault` (or use an existing one)
+3. Clone it to `~/.pocket-vault/`
 
 **Creating a GitHub token:**
 1. Go to https://github.com/settings/tokens
@@ -50,7 +50,7 @@ If you run `pv auth` again, it will show your current config and ask if you want
 ```
 Already authenticated
   Token: ****abcd
-  Repo:  yourusername/prompt-vault
+  Repo:  yourusername/pocket-vault
 
 Re-authenticate? [y/N]:
 ```
@@ -167,7 +167,7 @@ Now your agent loads the skill automatically when needed.
 ### File structure
 
 ```
-~/.prompt-vault/
+~/.pocket-vault/
 ├── .git/               # Git repository
 ├── coding/
 │   ├── python.md
@@ -249,13 +249,13 @@ Run `pv pull` to get latest from remote, then `pv push` to push your changes.
 ```
 prompt-vault/
 ├── src/
-│   └── prompt_vault/
-│       ├── __init__.py
-│       ├── cli.py          # Command routing
-│       ├── auth.py         # GitHub authentication
-│       ├── git.py          # Git operations
-│       ├── search.py       # Search functionality
-│       └── vault.py        # Add/edit/use/rm commands
+    └── pocket/
+        ├── __init__.py
+        ├── cli.py          # Command routing
+        ├── auth.py         # GitHub authentication
+        ├── git.py          # Git operations
+        ├── search.py       # Search functionality
+        └── vault.py        # Add/edit/use/rm commands
 ├── pyproject.toml
 └── README.md
 ```

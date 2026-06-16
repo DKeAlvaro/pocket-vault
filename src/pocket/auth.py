@@ -84,7 +84,7 @@ def auth_flow():
     print()
 
     # Ask for repo name
-    default_repo = f"{username}/prompt-vault"
+    default_repo = f"{username}/pocket-vault"
     repo_name = input(f"Repo name [{default_repo}]: ").strip()
     if not repo_name:
         repo_name = default_repo
