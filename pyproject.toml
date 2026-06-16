@@ -1,12 +1,26 @@
 [project]
 name = "prompt-vault"
 version = "0.1.0"
-description = "A CLI tool to manage a personal prompt library in a private git repo"
+description = "Keep track of your prompts across devices by saving them in a private git repo"
+readme = "README.md"
 requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    { name = "DKeAlvaro" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
 dependencies = [
     "click>=8.0.0",
     "requests>=2.28.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/DKeAlvaro/prompt-vault-tool"
+Source = "https://github.com/DKeAlvaro/prompt-vault-tool"
+BugTracker = "https://github.com/DKeAlvaro/prompt-vault-tool/issues"
 
 [project.scripts]
 pv = "prompt_vault.cli:main"
