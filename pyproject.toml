@@ -23,7 +23,7 @@ Source = "https://github.com/DKeAlvaro/pocket-vault"
 BugTracker = "https://github.com/DKeAlvaro/pocket-vault/issues"
 
 [project.scripts]
-pv = "pocket.cli:main"
+pv = "pocket_vault.cli:main"
 
 [build-system]
 requires = ["setuptools>=61.0"]
