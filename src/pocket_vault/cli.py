@@ -2,7 +2,7 @@ from pathlib import Path
 import sys
 import click
 from .auth import auth_flow
-from .git import pull, push, background_pull, VAULT_DIR, get_remote_url
+from .git import pull, push, background_pull, VAULT_DIR, CONFIG_DIR, get_remote_url
 from .search import search_vault, format_results
 from .state import add_favorite, remove_favorite
 from .vault import (
@@ -25,85 +25,75 @@ def _format_remote():
 def print_help():
     """Print short help text — just the essentials."""
     print(f"""
-Pocket Vault: your prompts, always with you.
+Pocket Vault
 
-Prompts are .md files in a private GitHub repo, with a local clone for fast search and clipboard copy.
+Numbers from `pv` are the fast path. Paths also work everywhere a number does.
 
-  pv                 List prompts (numbered, favorites first)
-  pv <number>        Copy prompt to clipboard (e.g. pv 3, pv 4.1)
-  pv add <path>      Create a new prompt (opens editor)
-  pv add <path> --content "..."  Create prompt with inline content
-                    AI agents: single-quote --content and use / in paths.
+BROWSE
+  pv                       List prompts (favorites first)
+  pv <query>               Search
 
-  Vault:  {VAULT_DIR}
+USE
+  pv <N>                   Copy prompt #N to clipboard
+                           pv 4.1 = first prompt in folder #4
+                           pv <N> on a folder copies every prompt concatenated
+
+WRITE
+  pv add <path>            Create a new prompt (opens $EDITOR)
+  pv add <path> --content "..."  Inline, no editor
+
+VAULT
+  Location: {VAULT_DIR}
 {_format_remote()}
 
-First time? Run `pv auth`. More commands: `pv help-full`.
+First time? `pv auth`. More: `pv help-full`.
 """)
 
 
 def print_full_help():
     """Print full help text with all commands."""
     print(f"""
-Pocket Vault: your most used prompts, always with you.
+Pocket Vault
 
-SEARCHING
-  pv <query>              Search by keyword across all prompts
-  pv python style         Example: finds prompts about python style
-  pv                      List prompts with hierarchical numbers
-  pv <number>             Copy that prompt to your clipboard
-  pv 4.1                  Copy the first prompt in folder 4
-  pv 4                    Copy all prompts in folder 4 (concatenated)
+Numbers from `pv` are the fast path. Paths also work everywhere a number does.
 
-ADDING PROMPTS
-  pv add <path>           Create a new prompt (opens editor)
-  pv add <path> --content Create a new prompt with inline content (no editor)
-  pv add coding/python    Creates coding/python.md in your vault
-  pv add ideas            Creates ideas.md in your vault
-  Folders are created automatically. .md is added if missing.
-  AI agents: wrap --content in single quotes ('...') so backslashes stay
-  literal. Use forward slashes in paths, not backslashes.
+BROWSE
+  pv                       List prompts (favorites first, hierarchical)
+  pv <query>               Search names, folder names, and file content (multi-word ok)
 
-EDITING PROMPTS
-  pv edit <path>          Open an existing prompt in your editor
-  pv edit coding/python   Opens coding/python.md for editing
-  pv edit <number>        Edit the prompt at that position in 'pv'
+USE
+  pv <N>                   Copy prompt #N to clipboard
+                           pv 4.1 = first prompt in folder #4
+                           pv <N> on a folder copies every prompt concatenated
+  pv read <N|path>         Print to stdout
+  pv copy <N|path>         Same as pv <N>, but explicit (use in scripts)
+  pv use <N|path>          Copy the .md file into your current directory
+  pv use <N> as <name>     Save under a different filename (e.g. AGENTS.md, CLAUDE.md)
+                           If destination exists: overwrite, append, or cancel.
 
-FAVORITES
-  pv fav <path>           Pin a prompt to the top of the list
-  pv fav jupyter          jupyter.md appears as #1 in 'pv'
-  pv unfav <path>         Remove a prompt from favorites
-  pv unfav jupyter
+WRITE
+  pv add <path>                  Create a new prompt (opens $EDITOR)
+  pv add <path> --content "..."  Inline, no editor
+                                 AI agents: single-quote --content so backslashes stay literal.
+                                 Use / in paths, not \\.
+  pv edit <N|path>         Open an existing prompt in $EDITOR
+  pv rm <N|path>           Delete a file or folder (folders delete recursively)
+  pv rm coding             deletes the whole coding/ folder
+  pv fav <N|path>          Pin to top (favorites become #1, #2, ...)
+  pv unfav <N|path>        Unpin
 
-USING PROMPTS
-  pv read <path>          Output prompt content to stdout
-  pv read <number>        Read the prompt at that position in 'pv'
-  pv copy <path>          Copy a prompt to your clipboard
-  pv copy <number>        Copy the prompt at that position in 'pv'
-  pv use <path>           Copy a prompt to your current folder
-  pv use <path> as <name>  Save under a different filename (e.g. pv use jupyter as AGENTS.md)
-  pv use <number>         Copy the prompt at that position to cwd
-                          If the destination exists, prompts to overwrite, append, or cancel.
+SYNC
+  pv pull / pv push        Manual git sync (writes auto-commit and push, rarely needed)
+  pv auth                  One-time GitHub setup
 
-DELETING
-  pv rm <path>            Delete a prompt file or entire folder
-  pv rm coding/python     Deletes coding/python.md
-  pv rm coding            Deletes the whole coding/ folder
-
-SYNCING
-  pv pull                 Pull latest changes from remote
-  pv push                 Push local changes to remote
-  Writes (add, edit, rm) auto-commit and push.
-  Reads (search, browse) are instant from local copy.
-
-SETUP
-  pv auth                 Authenticate with GitHub (one time)
-
-YOUR VAULT
+VAULT
   Location: {VAULT_DIR}
 {_format_remote()}
-  It is a regular git repo. You can navigate it with ls, cat, etc.
-  All changes are tracked in git history.
+  Plain git repo -- ls, cat, git log all work.
+
+STATE  (per device, not synced)
+  Location: {CONFIG_DIR}
+  Token, repo name, favorites, recents.
 """)
 
 
