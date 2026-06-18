@@ -17,6 +17,10 @@
 </p>
 
 <p align="center">
+  <a href="https://youtu.be/fCl30B2H0ZU"><img src="https://img.youtube.com/vi/fCl30B2H0ZU/maxresdefault.jpg" alt="Pocket Vault demo" width="700"></a>
+</p>
+
+<p align="center">
   <a href="https://pypi.org/project/pocket-vault/"><img src="https://img.shields.io/pypi/v/pocket-vault?color=blue&logo=pypi&logoColor=white" alt="PyPI"></a>
   <a href="https://github.com/DKeAlvaro/pocket-vault/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
   <a href="https://github.com/DKeAlvaro/pocket-vault"><img src="https://img.shields.io/badge/stars-★-yellow?style=social" alt="GitHub Stars"></a>
