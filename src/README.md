@@ -142,6 +142,8 @@ pv add projects/alpha/onboarding
 ### `pv add <path> --content "..."`
 Create a new prompt with inline content, without opening an editor. Useful for programmatic use by LLMs or scripts.
 
+> **For AI agents:** wrap `--content` in single quotes (`'...'`) so the shell doesn't interpret backslash escapes like `\n`, `\t`, or `\b` as control characters — this silently corrupts the stored content. Use forward slashes in paths (`coding/python-style`), not backslashes.
+
 ```bash
 pv add coding/python-style --content "Always use type hints and dataclasses."
 pv add writing/email-drafting --content "You are a professional email assistant."

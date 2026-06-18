@@ -33,6 +33,7 @@ Prompts are .md files in a private GitHub repo, with a local clone for fast sear
   pv <number>        Copy prompt to clipboard (e.g. pv 3, pv 4.1)
   pv add <path>      Create a new prompt (opens editor)
   pv add <path> --content "..."  Create prompt with inline content
+                    AI agents: single-quote --content and use / in paths.
 
   Vault:  {VAULT_DIR}
 {_format_remote()}
@@ -60,6 +61,8 @@ ADDING PROMPTS
   pv add coding/python    Creates coding/python.md in your vault
   pv add ideas            Creates ideas.md in your vault
   Folders are created automatically. .md is added if missing.
+  AI agents: wrap --content in single quotes ('...') so backslashes stay
+  literal. Use forward slashes in paths, not backslashes.
 
 EDITING PROMPTS
   pv edit <path>          Open an existing prompt in your editor

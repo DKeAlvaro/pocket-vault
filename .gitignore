@@ -5,3 +5,5 @@ dist/
 build/
 .env
 .pypirc
+AGENTS.md
+assets/demo.mp4
