@@ -81,7 +81,9 @@ USING PROMPTS
   pv copy <path>          Copy a prompt to your clipboard
   pv copy <number>        Copy the prompt at that position in 'pv'
   pv use <path>           Copy a prompt to your current folder
+  pv use <path> as <name>  Save under a different filename (e.g. pv use jupyter as AGENTS.md)
   pv use <number>         Copy the prompt at that position to cwd
+                          If the destination exists, prompts to overwrite, append, or cancel.
 
 DELETING
   pv rm <path>            Delete a prompt file or entire folder
@@ -251,14 +253,20 @@ def main(args):
 
     if command == "use":
         if len(args) < 2:
-            print("Error: Usage: pv use <path>")
+            print("Error: Usage: pv use <path> [as <name>]")
             sys.exit(1)
         arg = args[1]
         path, err = resolve_number_or_path(arg, get_numbered_list())
         if err:
             print(f"Error: {err}")
             sys.exit(1)
-        success, message = use_prompt(path)
+        dest_name = None
+        if len(args) >= 3 and args[2] == "as":
+            if len(args) < 4:
+                print("Error: 'as' requires a destination name")
+                sys.exit(1)
+            dest_name = args[3]
+        success, message = use_prompt(path, dest_name=dest_name)
         print(message)
         if not success:
             sys.exit(1)

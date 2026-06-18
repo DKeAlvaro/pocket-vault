@@ -113,13 +113,13 @@ Pytest patterns content
 Print the numbered list. See "The numbered list" above.
 
 ### `pv <number>` or `pv <path>`
-Copy a prompt to your clipboard. If the number points to a folder, copies the folder's contents concatenated.
+Copy a prompt to your clipboard. If the number points to a folder, copies the folder's contents concatenated. **Numbers are the fast path** — they're stable, short, and quick to type. Paths also work in every command that takes a prompt.
 
 ```bash
 pv 1
-pv coding/python-style
 pv 4.1
 pv 4              # folder, copies all
+pv coding/python-style
 ```
 
 ### `pv <query>`
@@ -131,7 +131,7 @@ pv async patterns
 ```
 
 ### `pv add <path>`
-Create a new prompt. Opens your editor. Folders are created automatically. `.md` is added if missing. Auto-commits and pushes on save.
+Create a new prompt. Opens your editor. Folders are created automatically. `.md` is added if missing. Auto-commits and pushes on save. `add` takes a path only — there's no entry to number yet.
 
 ```bash
 pv add coding/python-style
@@ -149,23 +149,23 @@ pv add coding/python-style --content "Always use type hints and dataclasses."
 pv add writing/email-drafting --content "You are a professional email assistant."
 ```
 
-### `pv edit <path>` or `pv edit <number>`
+### `pv edit <number>` or `pv edit <path>`
 Open an existing prompt in your editor. Auto-commits and pushes on save.
 
 ```bash
-pv edit coding/python-style
 pv edit 3
+pv edit coding/python-style
 ```
 
-### `pv read <path>` or `pv read <number>`
+### `pv read <number>` or `pv read <path>`
 Print a prompt's content to stdout. Use this when an agent can read stdout.
 
 ```bash
-pv read coding/python-style
 pv read 3
+pv read coding/python-style
 ```
 
-### `pv copy <path>` or `pv copy <number>`
+### `pv copy <number>` or `pv copy <path>`
 Copy a prompt to your system clipboard. Same as `pv <number>` for a single file, but explicit.
 
 Platform support:
@@ -174,34 +174,47 @@ Platform support:
 - Linux: requires `xclip` or `xsel`
 
 ```bash
-pv copy coding/python-style
 pv copy 3
+pv copy coding/python-style
 ```
 
-### `pv use <path>` or `pv use <number>`
+### `pv use <number>` or `pv use <path>`
 Copy a prompt's file into your current working directory. Useful when you want a static copy of a prompt in a project.
 
 ```bash
-pv use coding/python-style
 pv use 3
+pv use coding/python-style
 ```
 
-### `pv rm <path>`
+### `pv use <number> as <name>` or `pv use <path> as <name>`
+Like `pv use`, but save under a different filename. `.md` is added if missing. If the destination already exists in the current directory, you are prompted to overwrite, append, or cancel. Appending joins the new content to the end of the existing file, separated by a blank line.
+
+```bash
+pv use 3 as AGENTS.md             # save prompt #3 as AGENTS.md
+pv use jupyter as AGENTS.md       # path also works
+pv use 3 as output                # saves as output.md
+```
+
+This is the command to reach for when you want to drop a prompt into a project as a starter file (`AGENTS.md`, `CLAUDE.md`, `README.md`, etc.) and then tweak it locally.
+
+### `pv rm <number>` or `pv rm <path>`
 Delete a prompt file or an entire folder. Auto-commits and pushes.
 
 ```bash
+pv rm 3                        # delete prompt #3
+pv rm 4                        # delete whole folder #4
 pv rm coding/python-style      # delete one file
 pv rm coding                   # delete whole folder
 ```
 
-### `pv fav <path>` and `pv unfav <path>`
-Pin a prompt to the top of the list (`fav`) or unpin it (`unfav`). Numbers also work.
+### `pv fav <number>` and `pv unfav <number>`
+Pin a prompt to the top of the list (`fav`) or unpin it (`unfav`). Paths also work.
 
 ```bash
-pv fav coding/python-style
 pv fav 3
-pv unfav coding/python-style
+pv fav coding/python-style
 pv unfav 3
+pv unfav coding/python-style
 ```
 
 Favorites are stored in `~/.config/pocket-vault/state.json` and are per-device. They don't sync with git. Your favorites on your laptop can differ from your favorites on your desktop.

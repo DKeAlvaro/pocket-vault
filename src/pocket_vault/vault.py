@@ -107,8 +107,12 @@ def read_prompt(path):
         return False, f"Error reading file: {e}"
 
 
-def use_prompt(path):
-    """Copy a prompt to the current directory."""
+def use_prompt(path, dest_name=None):
+    """Copy a prompt to the current directory.
+
+    If dest_name is given, save under that filename instead of the source's name.
+    If the destination already exists, prompt the user to overwrite, append, or cancel.
+    """
     if not VAULT_DIR.exists():
         return False, "Vault not initialized. Run 'pv auth' first."
 
@@ -121,9 +125,35 @@ def use_prompt(path):
     if not source.exists():
         return False, f"File not found: {path}"
 
-    # Copy to current directory
-    dest = Path.cwd() / source.name
-    shutil.copy2(source, dest)
+    if dest_name is None:
+        dest_name = source.name
+    elif not dest_name.endswith(".md"):
+        dest_name = dest_name + ".md"
+
+    dest = Path.cwd() / dest_name
+
+    if dest.is_file():
+        print(f"'{dest.name}' already exists in the current directory.")
+        try:
+            choice = input("Overwrite, append, or cancel? [o/a/c]: ").strip().lower()
+        except (EOFError, KeyboardInterrupt):
+            print()
+            return False, "Cancelled"
+        if choice in ("o", "overwrite"):
+            pass
+        elif choice in ("a", "append"):
+            existing = dest.read_text(encoding="utf-8")
+            new_content = source.read_text(encoding="utf-8")
+            dest.write_text(existing.rstrip() + "\n\n" + new_content, encoding="utf-8")
+            add_recent(path[:-3] if path.endswith(".md") else path)
+            return True, f"Appended to {dest}"
+        else:
+            return False, "Cancelled"
+
+    try:
+        shutil.copy2(source, dest)
+    except FileNotFoundError:
+        return False, f"Destination directory does not exist: {dest.parent}"
 
     add_recent(path[:-3] if path.endswith(".md") else path)
     return True, f"Copied to {dest}"
