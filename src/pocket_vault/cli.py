@@ -299,7 +299,11 @@ def main(args):
         if len(args) < 2:
             print("Error: Usage: pv rm <path>")
             sys.exit(1)
-        path = args[1]
+        arg = args[1]
+        path, err = resolve_number_or_path(arg, get_numbered_list())
+        if err:
+            print(f"Error: {err}")
+            sys.exit(1)
         success, message = delete_prompt(path)
         print(message)
         if not success:
